@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import s from './Modal.module.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+
+const modalRoot = document.querySelector('#modal-root');
 
 type ModalProps = {
   onCloseButtonClick: () => void,
@@ -9,15 +11,20 @@ type ModalProps = {
 
 function Modal(props: ModalProps) {
   const { onCloseButtonClick } = props;
-  return (
+  return createPortal(
     <div className={s.Overlay}>
       <div className={s.Modal}>
         <span className={s.modalClose} onClick={onCloseButtonClick}>
           &#10005; {/* HTML code for a multiplication sign */}
         </span>
         This is my new modal!
+        <div>
+          <button>Yes</button>
+          <button>No</button>
+        </div>
       </div>
-    </div>
+    </div>,
+    modalRoot,
   );
 }
 
